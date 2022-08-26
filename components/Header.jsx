@@ -14,7 +14,7 @@ function Header({ title }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        filterValue.trim().length > 0 && dispatch(filterUser(filterValue))
+        dispatch(filterUser(filterValue))
     }, [filterValue])
 
     return (

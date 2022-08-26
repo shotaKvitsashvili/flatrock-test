@@ -6,7 +6,7 @@ function Modal({ children, setOpenModal, title }) {
     const containerRef = useRef()
     return (
         <div
-            className='fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-[#0000008F]'
+            className='fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-[#0000008F] z-10'
             ref={containerRef}
             onClick={e => e.target === containerRef.current && setOpenModal(false)}
         >

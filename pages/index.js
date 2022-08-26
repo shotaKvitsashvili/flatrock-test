@@ -1,7 +1,9 @@
+import UserTable from "../components/user_table";
+
 export default function Home() {
-  return (
-    <div className="">
-     123
-    </div>
-  )
+    return (
+        <div className="pt-20">
+            <UserTable />
+        </div>
+    )
 }

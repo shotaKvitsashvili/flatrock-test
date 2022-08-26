@@ -1,8 +1,30 @@
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form"
 
+import { useDispatch } from "react-redux"
+
+import { addUser } from './redux/reducers/userSlice'
+
 function InviteForm() {
-    const { register, handleSubmit, watch, formState: { errors, touchedFields, isValid } } = useForm({ mode: 'onChange' });
-    const onSubmit = data => console.log(data);
+    const [isSending, setIsSending] = useState(false)
+    const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
+
+    const dispatch = useDispatch()
+
+    const onSubmit = data => {
+        setIsSending(true)
+        const body = {
+            ...data,
+            status: 'active'
+        }
+        axios.post('http://localhost:3000/users', body)
+            .then(res => {
+                dispatch(addUser(res.data))
+                setIsSending(false)
+            })
+            .catch(() => setIsSending(false))
+    };
 
     const ErrorMessage = ({ name }) => <div className="text-red-500">{errors[name] && errors[name].message}</div>
 
@@ -79,10 +101,10 @@ function InviteForm() {
             <div className="flex justify-between mt-9 items-center pl-7">
                 <button
                     className="rounded-[24px] px-4 py-3"
-                    disabled={!isValid}
+                    disabled={!isValid || isSending}
                     style={{
-                        backgroundColor: !isValid ? '#C6C6C6' : '#44A0D3',
-                        color: !isValid ? '#979797' : '#fff'
+                        backgroundColor: (!isValid || isSending) ? '#C6C6C6' : '#44A0D3',
+                        color: (!isValid || isSending) ? '#979797' : '#fff'
                     }}
                 >Send Invitation</button>
 

@@ -8,15 +8,19 @@ export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        addUser: () => { },
+        getUsers: (state, action) => { state.users = action.payload },
+        addUser: (state, action) => { state.users.unshift(action.payload) },
         editUser: () => { },
-        deleteUser: () => { },
+        deleteUser: (state, action) => { state.users = state.users.filter(user => user.id !== action.payload) },
         filterUser: (state, action) => {
             const val = action.payload
-            console.log(val);
+            return {
+                ...state,
+                users: state.users.filter(user => user.first_name.includes(val))
+            }
         }
     }
 })
 
-export const { addUser, editUser, deleteUser, filterUser } = userSlice.actions
+export const { getUsers, addUser, editUser, deleteUser, filterUser } = userSlice.actions
 export default userSlice.reducer
