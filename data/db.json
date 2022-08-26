@@ -1,36 +1,12 @@
 {
-  "users": [
-    {
-      "first_name": "sdf",
-      "last_name": "sdf",
-      "email": "crocolearning@crocolearning.edu.ge",
-      "role": "admin",
-      "status": "active",
-      "id": 1
-    },
-    {
-      "first_name": "user 1",
-      "last_name": "sd",
-      "email": "kvitsashvili@mail.ru",
-      "role": "admin",
-      "status": "active",
-      "id": 2
-    },
-    {
-      "first_name": "user 3",
-      "last_name": "sd 3",
-      "email": "kvitsashvili@mail.ru",
-      "role": "admin",
-      "status": "active",
-      "id": 3
-    },
-    {
-      "first_name": "user 345",
-      "last_name": "sd 333",
-      "email": "kvitsashvili@mail.ru",
-      "role": "admin",
-      "status": "active",
-      "id": 4
-    }
-  ]
+    "users": [
+        {
+            "first_name": "sdf",
+            "last_name": "sdf",
+            "email": "crocolearning@crocolearning.edu.ge",
+            "role": "admin",
+            "status": "active",
+            "id": 1
+        }
+    ]
 }

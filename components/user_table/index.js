@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import axios from "axios"
-import DataTable from 'react-data-table-component';
 import { useDispatch, useSelector } from "react-redux"
 
 import { getUsers } from '../redux/reducers/userSlice'
 
 import TableRow from "./TableRow.jsx";
-
-const columns = [
-    {
-        name: 'user',
-        selector: row => row.first_name
-    },
-    {
-        name: 'role',
-        selector: row => row.role
-    },
-    {
-        name: 'status',
-        selector: row => row.status
-    },
-    {
-        name: 'action'
-    },
-]
 
 function UserTable() {
     // const [users, setUsers] = useState(null)

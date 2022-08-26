@@ -25,6 +25,7 @@ function TableRow({ user }) {
                     </div>
                 </td>
             </tr>
+            
             <AnimatePresence>
                 {
                     openModal && <Modal setOpenModal={setOpenModal} title="Delete user">
