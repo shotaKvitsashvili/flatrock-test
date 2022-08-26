@@ -8,9 +8,14 @@ function InviteForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="flex justify-between gap-1">
-                <img src="/icons/face.svg" alt="user" />
-                                <div className="flex-grow-[1]">
+            <div className="flex justify-between gap-1 relative pl-7">
+                <img
+                    src="/icons/face.svg"
+                    alt="user"
+                    className="absolute top-1/2 -translate-y-1/2 -left-4"
+                />
+
+                <div className="flex-grow-[1]">
                     <input
                         type="text"
                         {...register('first_name', { required: "First name is required" })}
@@ -32,9 +37,13 @@ function InviteForm() {
             </div>
 
             <div className="my-14 w-full">
-                <div className="flex items-center">
-                    <img src="/icons/email_at.svg" alt="at" />
-                    
+                <div className="flex items-center relative pl-7">
+                    <img
+                        src="/icons/email_at.svg"
+                        alt="at"
+                        className="absolute top-1/2 -translate-y-1/2 -left-4"
+                    />
+
                     <input
                         type="email"
                         {...register('email', { pattern: { value: /\S+@\S+\.\S+/, message: 'Email is required' } })}
@@ -45,9 +54,13 @@ function InviteForm() {
                 </div>
             </div>
 
-            <div className="flex items-center">
-                <img src="/icons/key.svg" alt="key" />
-                
+            <div className="flex items-center relative pl-7">
+                <img
+                    src="/icons/key.svg"
+                    alt="key"
+                    className="absolute top-1/2 -translate-y-1/2 -left-4"
+                />
+
                 <div className="flex justify-between gap-1 flex-grow-[1]">
                     <select
                         {...register('role', { required: "Role is required" })}
@@ -63,7 +76,7 @@ function InviteForm() {
                 <ErrorMessage name="role" />
             </div>
 
-            <div className="flex justify-between mt-9 items-center">
+            <div className="flex justify-between mt-9 items-center pl-7">
                 <button
                     className="rounded-[24px] px-4 py-3"
                     disabled={!isValid}
