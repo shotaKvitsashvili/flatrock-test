@@ -12,7 +12,8 @@ import { tableReducer, TABLE_INITIAL_STATE } from "../tableDataReducer";
 import TableFooter from "./TableFooter";
 
 function UserTable() {
-    const { users } = useSelector(state => state.users)
+    const { users, search_keyword } = useSelector(state => state.users)
+    const [filterData, setFilterData] = useState(users)
     const [isPending, setIsPending] = useState(true)
     const [tablePaginationState, reducerDispatch] = useReducer(tableReducer, TABLE_INITIAL_STATE)
 
@@ -34,6 +35,25 @@ function UserTable() {
             .catch(() => setIsPending(false))
     }, [])
 
+    useEffect(() => {
+        const u = [...users]
+        if (search_keyword.length > 0) {
+            setFilterData(u.filter(user =>
+                user.first_name.toLowerCase().includes(search_keyword.toLowerCase())
+                ||
+                user.last_name.toLowerCase().includes(search_keyword.toLowerCase())
+            ))
+        } else {
+            setFilterData(users)
+        }
+    }, [search_keyword, users])
+
+    const sortBy = key => {
+        setFilterData(
+            [...filterData].sort((a, b) => a[key].toLowerCase().localeCompare(b[key].toLowerCase()))
+        )
+    }
+
     return (
         <div className="w-full pl-side-gap">
             {isPending && <LoaderDots />}
@@ -53,7 +73,8 @@ function UserTable() {
                                             return <th
                                                 className={`${firstItem ? 'pb-6 text-left' : 'pb-6 opacity-[.3]'} ${lastItem ? 'text-right' : ''}`}
                                                 onClick={() => {
-                                                    !lastItem && console.log(heading);
+                                                    const key = heading === 'user' ? 'first_name' : heading
+                                                    !lastItem && sortBy(key)
                                                 }}
                                             >
                                                 <div className={`flex items-center gap-2 ${lastItem ? 'justify-end' : (firstItem ? '' : 'justify-center')}`}>
@@ -68,7 +89,7 @@ function UserTable() {
 
                             <tbody className="text-center relative">
                                 {
-                                    users?.slice(tablePaginationState.startIndex, tablePaginationState.endIndex).map(user => (
+                                    filterData?.slice(tablePaginationState.startIndex, tablePaginationState.endIndex).map(user => (
                                         user && <>
                                             <tr className={`absolute -left-[calc(theme(side-gap)-12px)] ${user.status === 'active' ? '' : 'opacity-[.35]'}`}>
                                                 <img src="/icons/user.svg" alt={user.first_name + ' ' + user.last_name} className="mt-[22px]" />

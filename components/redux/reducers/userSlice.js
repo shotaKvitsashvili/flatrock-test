@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    users: []
+    users: [],
+    search_keyword: ''
 }
 
 export const userSlice = createSlice({
@@ -19,15 +20,16 @@ export const userSlice = createSlice({
 
         },
         deleteUser: (state, action) => { state.users = state.users.filter(user => user._id !== action.payload) },
-        filterUser: (state, action) => {
-            const val = action.payload
-            return {
-                ...state,
-                users: state.users.filter(user => user.first_name.includes(val))
-            }
+        filterKeyword: (state, action) => {
+            state.search_keyword = action.payload
+            // const val = action.payload
+            // return {
+            //     ...state,
+            //     users: state.users.filter(user => user.first_name.includes(val))
+            // }
         }
     }
 })
 
-export const { getUsers, addUser, editUser, deleteUser, filterUser } = userSlice.actions
+export const { getUsers, addUser, editUser, deleteUser, filterKeyword } = userSlice.actions
 export default userSlice.reducer

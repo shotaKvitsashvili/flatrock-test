@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 
 import Modal from './modal'
-import { filterUser } from './redux/reducers/userSlice'
+import { filterKeyword } from './redux/reducers/userSlice'
 import InviteForm from './InviteForm'
 
 
@@ -19,7 +19,7 @@ function Header({ title, isUserPage }) {
     const router = useRouter()
 
     useEffect(() => {
-        dispatch(filterUser(filterValue))
+        dispatch(filterKeyword(filterValue))
     }, [filterValue])
 
     return (

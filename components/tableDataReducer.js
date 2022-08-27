@@ -16,13 +16,6 @@ const createPaginationArray = (count) => {
     return countArr
 }
 
-const changeIndex = (start, end) => {
-    const indexes = {
-        start: 0,
-        end: 0
-    }
-}
-
 export const tableReducer = (state, action) => {
     let end_index;
     switch (action.type) {

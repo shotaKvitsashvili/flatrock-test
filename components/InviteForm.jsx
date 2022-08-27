@@ -8,7 +8,7 @@ import { addUser } from './redux/reducers/userSlice'
 
 function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
     const [isSending, setIsSending] = useState(false)
-    const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
 
     const dispatch = useDispatch()
 

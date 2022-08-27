@@ -20,7 +20,7 @@ function Modal({ children, setOpenModal, title }) {
                 <div className='cursor-pointer absolute top-[24px] right-[24px]' onClick={() => setOpenModal(false)}>
                     <img src='/icons/close.svg' alt='close' />
                 </div>
-                <h2 className='pt-6 pb-12 pl-6 text-[48px] font-semibold'>
+                <h2 className='pt-6 pb-12 pl-6 text-[48px] font-semibold text-left'>
                     {title}
                 </h2>
                 {children}

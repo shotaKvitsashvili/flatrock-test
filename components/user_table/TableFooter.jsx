@@ -2,10 +2,12 @@ import React from 'react'
 
 function TableFooter({ dispatch, state }) {
     return (
-        <div className="mt-6 flex justify-between font-light">
+        <div className="my-6 flex justify-between font-light">
             <div className="flex items-center">
                 <span>Records on page</span>
                 <select
+                    className='bg-transparent appearance-none bg-[url(/icons/arrow_down.svg)] bg-no-repeat min-w-[30px] outline-none ml-4'
+                    style={{ backgroundPosition: 'right center' }}
                     onChange={e => dispatch({ type: 'PERPAGE_CHANGE', payload: e.target.value })}
                 >
                     <option value={5}>5</option>
@@ -29,6 +31,7 @@ function TableFooter({ dispatch, state }) {
                             text-black
                             font-semibold
                             `}
+                            key={count}
                         >
                             {count + 1}
                         </div>

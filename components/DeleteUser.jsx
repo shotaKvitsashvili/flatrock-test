@@ -25,13 +25,28 @@ function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUse
                         setOpenModal(false)
                         setUserDeleted(false)
                     }}
-                    className="px-6 py-1 mt-5 bg-[#44A0D3] text-white cursor-pointer"
+                    className="px-6 py-1 mt-5 bg-[#f79796] text-white cursor-pointer"
                 >Ok</div>
             </div>
             :
-            <div>
-                delete: {firstName + ' '} {lastName}
-                <div onClick={handleDeleteUser}>delete</div>
+            <div className="pl-6">
+                <div className="relative flex items-center">
+                    <div className="absolute top-0 -left-10 pt-[2px]">
+                        <img
+                            src="/icons/face.svg"
+                            alt="user"
+                        />
+                    </div>
+
+                    <div className="flex items-center justify-between w-full border-b border-[#D8D8D8] pb-8">
+                        <span>{firstName + ' '} {lastName}</span>
+                        <span className="text-[#44A0D3] font-bold">Active User</span>
+                    </div>
+                </div>
+                <div
+                    onClick={handleDeleteUser}
+                    className="rounded-[24px] px-6 py-2 bg-[#f79796] text-white w-fit cursor-pointer mt-6"
+                >Delete User</div>
             </div>
     )
 }
