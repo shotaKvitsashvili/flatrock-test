@@ -9,3 +9,13 @@
 .header-button {
     @apply w-[72px] h-[72px] flex items-center justify-center rounded-full text-[58px] text-white font-light relative top-9 cursor-pointer;
 }
+
+.table-footer-pagination-btn {
+    @apply rounded-[4px] w-8 h-8  flex items-center justify-center cursor-pointer transition-all;
+}
+.table-footer-pagination-btn.active {
+    @apply shadow-[0px_3px_6px_#00000029] bg-[#C6C6C6];
+}
+.table-footer-pagination-btn:hover {
+    @apply shadow-[0px_3px_6px_#00000029] bg-[#C6C6C6];
+}

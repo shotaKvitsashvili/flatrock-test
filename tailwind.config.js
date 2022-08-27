@@ -10,7 +10,7 @@ module.exports = {
         },
         extend: {
             spacing: {
-                'side-gap': '84px'
+                'side-gap': '94px'
             },
             fontFamily: {
                 "bold": 'segoe-bold',
@@ -19,6 +19,7 @@ module.exports = {
                 "italic": 'segoe-italic',
             }
         },
+        'side-gap': '94px'
     },
     plugins: [],
 }

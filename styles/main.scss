@@ -1,20 +1,62 @@
 @font-face {
     font-family: segoe-bold;
-    src: url('/fonts/segoeui-bold.ttf');
+    src: url("/fonts/segoeui-bold.ttf");
 }
 @font-face {
     font-family: segoe-light;
-    src: url('/fonts/segoeui-light.ttf');
+    src: url("/fonts/segoeui-light.ttf");
 }
 @font-face {
     font-family: segoe-semibold;
-    src: url('/fonts/segui-semi-bold.ttf');
+    src: url("/fonts/segui-semi-bold.ttf");
 }
 @font-face {
     font-family: segoe-italic;
-    src: url('/fonts/segui-light-italic.ttf');
+    src: url("/fonts/segui-light-italic.ttf");
 }
 
 body {
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
+}
+
+$active_switch_color: #44a0d3;
+$inactive_switch_color: #f00;
+
+.user__status__switch {
+    width: 35px;
+    height: 15px;
+    position: relative;
+    display: block;
+    border-radius: 30px;
+    margin: auto;
+    cursor: pointer;
+    transition: .2s all ease-in-out;
+    &::before {
+        content: "";
+        transition: .2s all ease-in-out;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -5px;
+    }
+    &.user-active {
+        background-color: rgba($color: $active_switch_color, $alpha: 0.5);
+        &::before {
+            background-color: $active_switch_color;
+            right: -5px;
+        }
+    }
+
+    &.user-inactive {
+        background-color: rgba($color: $inactive_switch_color, $alpha: 0.5);
+        &::before {
+            background-color: $inactive_switch_color;
+            left: -5px;
+        }
+    }
+
+    &__checkbox {
+        appearance: none;
+    }
 }
