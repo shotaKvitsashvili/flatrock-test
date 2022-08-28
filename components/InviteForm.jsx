@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form"
 
 import { useDispatch } from "react-redux"
@@ -16,7 +16,8 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
         setIsSending(true)
         const body = {
             ...data,
-            status: 'active'
+            status: 'active',
+            img: '/icons/user.svg'
         }
         axios.post('http://localhost:3002/api/users', body)
             .then(res => {
@@ -27,13 +28,17 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
             .catch(() => setIsSending(false))
     };
 
+    useEffect(() => {
+        return () => setUserAdded(false)
+    }, [])
+
     const ErrorMessage = ({ name }) => <div className="text-red-500">{errors[name] && errors[name].message}</div>
 
     return (
         userAdded
             ?
             <div className="flex flex-col items-center">
-                <div className="text-2xl">User successfully added!</div>
+                <div className="text-2xl">User added successfully!</div>
                 <div
                     onClick={() => {
                         setOpenModal(false)

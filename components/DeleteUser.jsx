@@ -1,10 +1,11 @@
 import axios from "axios"
+import { useEffect } from "react"
 
 import { useDispatch } from "react-redux"
 
 import { deleteUser } from './redux/reducers/userSlice'
 
-function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUserDeleted }) {
+function DeleteUser({ firstName, lastName, id, setOpenModal, openModal, userDeleted, setUserDeleted }) {
     const dispatch = useDispatch()
 
     const handleDeleteUser = () => {
@@ -15,11 +16,15 @@ function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUse
             })
     }
 
+    useEffect(() => {
+        return () => setUserDeleted(false)
+    }, [])
+
     return (
         userDeleted
             ?
             <div className="flex flex-col items-center">
-                <div className="text-2xl">User successfully deleted!</div>
+                <div className="text-2xl">User deleted successfully!</div>
                 <div
                     onClick={() => {
                         setOpenModal(false)

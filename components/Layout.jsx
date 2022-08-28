@@ -13,7 +13,9 @@ function Layout({ children }) {
     return (
         <div>
             <Header isUserPage={isUserPage} title={isUserPage ? 'User Setup' : 'Project Access'} />
-            {children}
+            <main className='pt-20 px-4'>
+                {children}
+            </main>
         </div>
     )
 }

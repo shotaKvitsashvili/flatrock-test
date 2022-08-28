@@ -9,8 +9,15 @@ export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        getUsers: (state, action) => { state.users = action.payload },
-        addUser: (state, action) => { state.users.unshift(action.payload) },
+        getUsers: (state, action) => {
+            state.users = action.payload
+        },
+        addUser: (state, action) => {
+            return {
+                ...state,
+                users: [action.payload, ...state.users]
+            }
+        },
         editUser: (state, action) => {
             const { payload } = action
             const { _id } = payload
@@ -19,7 +26,13 @@ export const userSlice = createSlice({
             if (index !== -1) state.users[index] = payload
 
         },
-        deleteUser: (state, action) => { state.users = state.users.filter(user => user._id !== action.payload) },
+        deleteUser: (state, action) => {
+            const withoutDeleted = state.users.filter(user => user._id !== action.payload)
+            return {
+                ...state,
+                users: withoutDeleted
+            }
+        },
         filterKeyword: (state, action) => {
             state.search_keyword = action.payload
             // const val = action.payload

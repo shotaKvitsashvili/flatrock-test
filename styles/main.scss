@@ -30,10 +30,10 @@ $inactive_switch_color: #f00;
     border-radius: 30px;
     margin: auto;
     cursor: pointer;
-    transition: .2s all ease-in-out;
+    transition: 0.2s all ease-in-out;
     &::before {
         content: "";
-        transition: .2s all ease-in-out;
+        transition: 0.2s all ease-in-out;
         width: 25px;
         height: 25px;
         border-radius: 50%;
@@ -58,5 +58,22 @@ $inactive_switch_color: #f00;
 
     &__checkbox {
         appearance: none;
+    }
+}
+
+.user__page {
+    &__avatar {
+        position: relative;
+        &__key {
+            position: absolute;
+            bottom: 24px;
+            right: 0;
+            display: none;
+        }
+        &--admin {
+            .user__page__avatar__key {
+                display: block;
+            }
+        }
     }
 }

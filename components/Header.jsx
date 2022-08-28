@@ -26,7 +26,7 @@ function Header({ title, isUserPage }) {
         <>
             <div className="bg-white shadow-[0px_3px_6px_#00000029]">
                 <div className='container'>
-                    <div className="mx-side-gap pt-24 pb-16 flex justify-between items-center">
+                    <div className="mx-side-gap pt-16 pb-11 flex justify-between items-center">
                         <h1 className='font-semibold text-[48px]'>{title}</h1>
 
                         {

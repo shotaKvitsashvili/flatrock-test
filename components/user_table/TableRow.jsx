@@ -14,7 +14,6 @@ import axios from 'axios';
 function TableRow({ user }) {
     const [openModal, setOpenModal] = useState(false)
     const [userDeleted, setUserDeleted] = useState(false)
-    const [userToggleChecked, setUserToggleChecked] = useState(user.status === 'active')
 
     const dispatch = useDispatch()
 
@@ -99,6 +98,7 @@ function TableRow({ user }) {
                             setOpenModal={setOpenModal}
                             userDeleted={userDeleted}
                             setUserDeleted={setUserDeleted}
+                            openModal={openModal}
                         />
                     </Modal>
                 }

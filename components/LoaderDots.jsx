@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 function LoaderDots() {
     return (
-        <div className='w-full flex justify-center items-center pt-20 gap-1'>
+        <div className='w-full flex justify-center items-center gap-1'>
             {
                 [...Array(3)].map(index => (
                     <motion.div
