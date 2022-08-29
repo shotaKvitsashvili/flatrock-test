@@ -35,14 +35,12 @@ export const userSlice = createSlice({
         },
         filterKeyword: (state, action) => {
             state.search_keyword = action.payload
-            // const val = action.payload
-            // return {
-            //     ...state,
-            //     users: state.users.filter(user => user.first_name.includes(val))
-            // }
-        }
+        },
+        setPermissions: (state, action) => {
+            // state.search_keyword = action.payload
+        },
     }
 })
 
-export const { getUsers, addUser, editUser, deleteUser, filterKeyword } = userSlice.actions
+export const { getUsers, addUser, editUser, deleteUser, filterKeyword, setPermissions } = userSlice.actions
 export default userSlice.reducer

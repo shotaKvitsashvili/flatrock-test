@@ -13,28 +13,27 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Modal from '../modal';
 
-const imgMaxSize = 300;
+const imgMaxSize = 50;
 
 function UserPage({ data }) {
     const [largeFileWarning, setLargeFileWarning] = useState(false)
     const [openModal, setOpenModal] = useState(false)
-    const [isPending, setIsPendin] = useState(false)
+    const [isPending, setIsPending] = useState(false)
 
     const { _id, superAdmin, permissions, role } = data
 
     const { users } = useSelector(state => state.users)
     const user = users.find(u => u._id === _id)
+    // const user = data
 
     const { register, handleSubmit, formState: { errors, isValid }, setValue } = useForm({ mode: 'onChange' })
 
-
-    console.log(permissions);
 
     const dispatch = useDispatch()
     const router = useRouter()
 
     const onSubmit = form_data => {
-        setIsPendin(true)
+        setIsPending(true)
         const u = { ...data }
         const {
             first_name,
@@ -47,7 +46,6 @@ function UserPage({ data }) {
         u.role = role
         u.img = form_data.img ? form_data.img : u.img
 
-        console.log(u);
         dispatch(editUser(u))
         axios.put(`http://localhost:3002/api/users/${_id}`, u)
             .then(res => res.status === 200 && router.push('/'))
@@ -58,7 +56,7 @@ function UserPage({ data }) {
     }, [largeFileWarning])
 
     return (
-        user && <div className='grid lg:grid-cols-3 grid-cols-1 user__page'>
+        user && <div className='grid lg:grid-cols-3 grid-cols-1 user__page pb-4'>
             <UserInfo
                 data={data}
                 user={user}
@@ -68,12 +66,10 @@ function UserPage({ data }) {
             />
 
             <UserForm
-                data={data}
                 user={user}
                 register={register}
                 handleSubmit={handleSubmit}
                 errors={errors}
-                isValid={isValid}
                 onSubmit={onSubmit}
                 dispatch={dispatch}
                 editUser={editUser}
@@ -81,9 +77,10 @@ function UserPage({ data }) {
             />
             <Permissions
                 permissions={permissions}
-                superAdmin={superAdmin}
+                superAdmin={user.superAdmin}
                 role={role}
                 user={user}
+                id={_id}
             />
             <AnimatePresence>
                 {

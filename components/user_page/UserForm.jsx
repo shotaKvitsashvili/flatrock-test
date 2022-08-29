@@ -1,15 +1,15 @@
 import axios from "axios";
 
 function UserForm(props) {
-    const { data, user, register, handleSubmit, errors, isValid, onSubmit, useDispatch, editUser, dispatch, isPending } = props
-    const { first_name, last_name, role, status, _id } = data
+    const { user, register, handleSubmit, errors, onSubmit, editUser, dispatch, isPending, } = props
+    const { first_name, last_name, role, _id } = user
 
     const ErrorMessage = ({ name }) => <div className="text-red-500">{errors[name] && errors[name].message}</div>
 
     const handleUserStatusChange = e => {
         const { checked } = e.target;
 
-        const u = { ...data }
+        const u = { ...user }
         u.status = checked ? 'active' : 'inactive'
         dispatch(editUser(u))
 
@@ -17,22 +17,24 @@ function UserForm(props) {
     }
 
     return (
-        <div className="flex flex-col max-w-[320px]">
-            <h2 className="font-semibold text-3xl">Details</h2>
+        <div className="flex flex-col w-full lg:max-w-[320px]">
+            <h2 className="font-semibold text-3xl mt-6 lg:mt-0">Details</h2>
 
             {
-                user && <div className="relative my-14">
-                    <label
-                        className={`user__status__switch ${user.status === 'active' ? 'user-active' : 'user-inactive'}`}
-                        style={{ margin: 'unset', position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '-60px' }}
-                    >
-                        <input
-                            type="checkbox"
-                            className='user__status__switch__checkbox'
-                            onChange={e => handleUserStatusChange(e)}
-                            defaultChecked={user.status === 'active'}
-                        />
-                    </label>
+                user && <div className="relative my-14 flex items-center gap-6">
+                    <div className="static lg:absolute top-1/2 -translate-y-0 lg:-translate-y-1/2 left-[-60px]">
+                        <label
+                            className={`user__status__switch ${user.status === 'active' ? 'user-active' : 'user-inactive'}`}
+                            style={{ margin: 'unset' }}
+                        >
+                            <input
+                                type="checkbox"
+                                className='user__status__switch__checkbox'
+                                onChange={e => handleUserStatusChange(e)}
+                                defaultChecked={user.status === 'active'}
+                            />
+                        </label>
+                    </div>
 
                     <div className="font-light">
                         The user is <span className="font-bold capitalize">{user.status}</span>
@@ -40,7 +42,7 @@ function UserForm(props) {
                 </div>
             }
 
-            <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between h-full">
+            <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between h-full" encType="multipart/formdata">
                 <div>
                     <div className="">
                         <input
@@ -83,7 +85,7 @@ function UserForm(props) {
                 {
                     user.status === 'active' && <button
                         disabled={isPending}
-                        className='rounded-[100px] bg-[#44A0D3] text-white shadow-[0px_3px_6px_#00000029] py-4 w-[200px] text-center mt-6'
+                        className='rounded-[100px] bg-[#44A0D3] text-white shadow-[0px_3px_6px_#00000029] py-4 w-[200px] text-center mt-6 mx-auto lg:mx-[unset]'
                         style={{ opacity: isPending ? '.5' : '1' }}
                     >
                         Save Changes

@@ -26,11 +26,11 @@ function Header({ title, isUserPage }) {
         <>
             <div className="bg-white shadow-[0px_3px_6px_#00000029]">
                 <div className='container'>
-                    <div className="mx-side-gap pt-16 pb-11 flex justify-between items-center">
-                        <h1 className='font-semibold text-[48px]'>{title}</h1>
+                    <div className="mx-side-gap pt-16 pb-11 flex justify-between items-center flex-col lg:flex-row">
+                        <h1 className='font-semibold mx-auto lg:mx-[unset] text-[24px] lg:text-[48px]'>{title}</h1>
 
                         {
-                            !isUserPage && <div className="bordered-input min-w-[180px] justify-between">
+                            !isUserPage && <div className="bordered-input min-w-[180px] justify-between mt-4 lg:mt-0">
                                 <input
                                     type="text"
                                     onChange={e => setFilterValue(e.target.value)}

@@ -8,7 +8,7 @@ function UserInfo({ data, user, setValue, setLargeFileWarning, maxSize }) {
     const active = user.status === 'active'
 
     return (
-        <div className='flex flex-col w-fit items-center text-center'>
+        <div className='flex flex-col w-full lg:w-fit items-center text-center'>
             <div className={`w-[230px] h-[230px] user__page__avatar ${role === 'admin' ? 'user__page__avatar--admin' : ''}`}>
                 <img src={imgSrc} alt={first_name + ' ' + last_name} className="w-full h-full object-cover rounded-full" />
 
@@ -25,9 +25,7 @@ function UserInfo({ data, user, setValue, setLargeFileWarning, maxSize }) {
                         <FileBase64
                             multiple={false}
                             onDone={({ base64, size }) => {
-                                console.log(size);
                                 const imgSize = size.split(' ')[0]
-                                console.log(parseInt(imgSize));
 
                                 imgSize < maxSize && setImgSrc(base64)
                                 imgSize < maxSize ? setValue('img', base64) : setLargeFileWarning(true)
@@ -44,7 +42,7 @@ function UserInfo({ data, user, setValue, setLargeFileWarning, maxSize }) {
             </div>
 
             {
-                active && <div className='rounded-[100px] bg-[#7E7EF1] text-white shadow-[0px_3px_6px_#00000029] py-4 w-full mt-6'>
+                active && <div className='rounded-[100px] bg-[#7E7EF1] text-white shadow-[0px_3px_6px_#00000029] py-4 w-fit lg:w-full mt-6 px-4'>
                     Resend the invite
                 </div>
             }

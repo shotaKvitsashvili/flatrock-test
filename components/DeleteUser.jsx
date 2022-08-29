@@ -1,17 +1,27 @@
 import axios from "axios"
 import { useEffect } from "react"
 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { deleteUser } from './redux/reducers/userSlice'
+import { dataLength } from "./redux/reducers/paginationSlice";
 
-function DeleteUser({ firstName, lastName, id, setOpenModal, openModal, userDeleted, setUserDeleted }) {
+function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUserDeleted }) {
     const dispatch = useDispatch()
+    const { users } = useSelector(state => state.users)
 
     const handleDeleteUser = () => {
         axios.delete('http://localhost:3002/api/users/' + id)
             .then(() => {
+                const userLength = users.length - 1;
+
                 dispatch(deleteUser(id))
+                dispatch(dataLength({
+                    length: userLength,
+                    pagination_count: Math.ceil(userLength / 5),
+                    current_page: Math.ceil(userLength / 5)
+                }))
+
                 setUserDeleted(true)
             })
     }

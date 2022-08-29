@@ -1,4 +1,5 @@
-// ${user.status === 'active' ? 'user-active' : 'user-inactive'}
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
     Accordion,
@@ -11,51 +12,71 @@ import {
 import PermissionItemHeader from './PermissionItemHeader';
 import PermissionItem from './PermissionItem';
 
-function Permissions({ permissions: userPermissions, superAdmin, role, user }) {
+import { editUser } from '../redux/reducers/userSlice'
+
+function Permissions({ permissions: userPermissions, role, user, id }) {
     const active = user.status === 'active'
+
+    const dispatch = useDispatch()
+
+    const handleUserStatusChange = e => {
+        const { checked } = e.target;
+
+        const u = { ...user }
+        u.superAdmin = checked
+        dispatch(editUser(u))
+
+        axios.put(`http://localhost:3002/api/users/${id}`, u)
+    }
 
     return (
         role === 'admin'
             ?
             <div>
-                <div className="flex justify-between items-center ml-6">
+                <div className="flex justify-between items-center ml-0 lg:ml-6 mt-6 lg:mt-0">
                     <h2 className="font-semibold text-3xl">Permisssions</h2>
                     <span className={`${active ? '' : 'opacity-[0.5] pointer-events-none'} font-light`}>
-                        {superAdmin ? 'Super Admin' : 'Admin'}
+                        {user.superAdmin ? 'Super Admin' : 'Admin'}
                     </span>
                 </div>
 
                 <div className={active ? '' : 'opacity-[0.5] pointer-events-none'}>
-                    <div className="flex justify-between items-center pt-10 pb-6 border-b border-[#D8D8D8] ml-6">
+                    <div className="flex justify-between items-center pt-10 pb-6 border-b border-[#D8D8D8] ml-0 lg:ml-6">
                         <span className='font-bold'>Super Admin</span>
 
-                        <label className={`user__status__switch user-active`}
+                        <label className={`user__status__switch ${user.superAdmin ? 'user-active' : 'user-inactive'}`}
                             style={{ margin: 'unset' }}
                         >
                             <input
                                 type="checkbox"
                                 className='user__status__switch__checkbox'
-                                // onChange={e => handleUserStatusChange(e)}
-                                defaultChecked={true}
+                                onChange={e => handleUserStatusChange(e)}
+                                defaultChecked={user.superAdmin}
                             />
                         </label>
                     </div>
-                    <Accordion allowZeroExpanded onChange={(e) => console.log(e)}>
+                    <Accordion allowZeroExpanded>
                         {
                             Object.keys(userPermissions).map(permission => {
                                 const permissionItem = Object.keys(userPermissions[permission]);
 
                                 return <AccordionItem className='border-b border-[#D8D8D8] ml-6 pb-4' key={permission}>
                                     <AccordionItemHeading>
-                                        <AccordionItemButton>
-                                            <PermissionItemHeader key={permission} permission={permission} />
+                                        <AccordionItemButton className={user.superAdmin ? 'opacity-100' : 'opacity-50 pointer-events-none'}>
+                                            <PermissionItemHeader key={permission} permission={permission} user={user} id={id} />
                                         </AccordionItemButton>
                                     </AccordionItemHeading>
 
-                                    <AccordionItemPanel>
+                                    <AccordionItemPanel className={user.superAdmin ? 'opacity-100' : 'opacity-50 pointer-events-none'}>
                                         {
                                             permissionItem.map(p => (
-                                                <PermissionItem key={p} permissionItem={permissionItem} permissionItemKey={p} />
+                                                <PermissionItem
+                                                    key={p}
+                                                    permissionItem={permissionItem}
+                                                    permissionItemKey={p}
+                                                    user={user}
+                                                    permission={permission}
+                                                />
                                             ))
                                         }
                                     </AccordionItemPanel>

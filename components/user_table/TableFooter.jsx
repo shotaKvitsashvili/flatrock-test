@@ -1,6 +1,12 @@
-import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-function TableFooter({ dispatch, state }) {
+import { perpageChange, goToPrev, goToPage, goToNext } from '../redux/reducers/paginationSlice'
+
+function TableFooter() {
+    const dispatch = useDispatch()
+
+    const { currentPage, paginationCount } = useSelector(state => state.pagination)
+
     return (
         <div className="my-6 flex justify-between font-light">
             <div className="flex items-center">
@@ -8,7 +14,7 @@ function TableFooter({ dispatch, state }) {
                 <select
                     className='bg-transparent appearance-none bg-[url(/icons/arrow_down.svg)] bg-no-repeat min-w-[30px] outline-none ml-4'
                     style={{ backgroundPosition: 'right center' }}
-                    onChange={e => dispatch({ type: 'PERPAGE_CHANGE', payload: e.target.value })}
+                    onChange={e => dispatch(perpageChange(e.target.value))}
                 >
                     <option value={5}>5</option>
                     <option value={10}>10</option>
@@ -18,16 +24,16 @@ function TableFooter({ dispatch, state }) {
 
             <div className="flex items-center gap-3">
                 <button
-                    disabled={state.currentPage === 1}
-                    onClick={() => dispatch({ type: 'GO_TO_PREV', payload: state.currentPage })}
+                    disabled={currentPage === 1}
+                    onClick={() => dispatch(goToPrev())}
                 >Prev</button>
                 {
-                    state.paginationCount.map(count => (
+                    paginationCount.map(count => (
                         <div
-                            onClick={() => dispatch({ type: 'GO_TO_PAGE', payload: count + 1 })}
+                            onClick={() => dispatch(goToPage(count + 1))}
                             className={`
                             table-footer-pagination-btn
-                            ${state.currentPage === count + 1 ? 'active pointer-events-none' : ''}
+                            ${currentPage === count + 1 ? 'active pointer-events-none' : ''}
                             text-black
                             font-semibold
                             `}
@@ -38,8 +44,8 @@ function TableFooter({ dispatch, state }) {
                     ))
                 }
                 <button
-                    disabled={state.currentPage === state.paginationCount.length}
-                    onClick={() => dispatch({ type: 'GO_TO_NEXT', payload: state.currentPage })}
+                    disabled={currentPage === paginationCount.length}
+                    onClick={() => dispatch(goToNext())}
                 >next</button>
             </div>
         </div>

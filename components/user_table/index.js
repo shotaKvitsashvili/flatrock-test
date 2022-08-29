@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { useSelector } from "react-redux";
 
 import TableRow from "./TableRow.jsx";
 import LoaderDots from "../LoaderDots";
@@ -8,6 +8,8 @@ import TableHeader from "./TableHeader";
 import useTableData from "../useTableData.js";
 
 function UserTable() {
+    const { startIndex, endIndex, dataLength } = useSelector(state => state.pagination)
+
     const {
         filterData,
         isPending,
@@ -16,13 +18,13 @@ function UserTable() {
         reducerDispatch,
         headings
     } = useTableData()
-
+    
     return (
-        <div className="w-full pl-side-gap">
+        <div className="w-full pl-0 lg:pl-side-gap">
             {isPending && <LoaderDots />}
 
             {
-                tablePaginationState.dataLength > 0
+                (dataLength > 0 && !isPending)
                     ?
                     <>
                         <table className="w-full">
@@ -49,9 +51,9 @@ function UserTable() {
 
                             <tbody className="text-center relative">
                                 {
-                                    filterData?.slice(tablePaginationState.startIndex, tablePaginationState.endIndex).map(user => (
+                                    filterData?.slice(startIndex, endIndex).map(user => (
                                         user && <>
-                                            <tr className={`absolute -left-[calc(theme(side-gap)-12px)] ${user.status === 'active' ? '' : 'opacity-[.35]'}`}>
+                                            <tr className={`static lg:absolute -left-[calc(theme(side-gap)-12px)] ${user.status === 'active' ? '' : 'opacity-[.35]'}`}>
                                                 <img
                                                     src={user.img}
                                                     alt={user.first_name + ' ' + user.last_name}

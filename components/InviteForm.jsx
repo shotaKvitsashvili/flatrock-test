@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form"
 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { addUser } from './redux/reducers/userSlice'
+import { dataLength } from "./redux/reducers/paginationSlice";
 
 function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
     const [isSending, setIsSending] = useState(false)
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
-
+    
     const dispatch = useDispatch()
+    const { users } = useSelector(state => state.users)
 
     const onSubmit = data => {
         setIsSending(true)
@@ -21,7 +23,15 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
         }
         axios.post('http://localhost:3002/api/users', body)
             .then(res => {
+                const userLength = users.length + 1;
+
                 dispatch(addUser(res.data))
+                dispatch(dataLength({
+                    length: userLength,
+                    end_index: 5,
+                    pagination_count: Math.ceil(userLength / 5)
+                }))
+
                 setIsSending(false)
                 setUserAdded(true)
             })
