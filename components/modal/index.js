@@ -15,7 +15,7 @@ function Modal({ children, setOpenModal, title }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -200 }}
                 transition={{ duration: .3 }}
-                className="bg-white shadow-[0px_0px_30px_#00000029] p-[72px] min-w-[unset] lg:min-w-[650px] relative m-[0_40px_0_20px] lg:m-0"
+                className="bg-white shadow-[0px_0px_30px_#00000029] p-9 lg:p-[72px] min-w-[unset] lg:min-w-[650px] relative m-[0_20px] lg:m-0"
             >
                 <div className='cursor-pointer absolute top-[24px] right-[24px]' onClick={() => setOpenModal(false)}>
                     <img src='/icons/close.svg' alt='close' />

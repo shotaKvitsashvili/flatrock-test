@@ -55,7 +55,7 @@ function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUse
 
                     <div className="flex items-center justify-between w-full border-b border-[#D8D8D8] pb-8">
                         <span>{firstName + ' '} {lastName}</span>
-                        <span className="text-[#44A0D3] font-bold">Active User</span>
+                        <span className="text-[#44A0D3] font-bold text-sm ml-4">Active User</span>
                     </div>
                 </div>
                 <div

@@ -13,7 +13,7 @@ function UserForm(props) {
         u.status = checked ? 'active' : 'inactive'
         dispatch(editUser(u))
 
-        axios.put(`https://flatrock-api.herokuapp.com/api/users/status/${_id}`, { checked })
+        axios.put(`http://localhost:3002/api/users/status/${_id}`, { checked })
     }
 
     return (
@@ -44,7 +44,7 @@ function UserForm(props) {
 
             <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-between h-full" encType="multipart/formdata">
                 <div>
-                    <div className="">
+                    <div className="floatable-label-container">
                         <input
                             type="text"
                             {...register('first_name', { required: "First name is required" })}
@@ -52,10 +52,11 @@ function UserForm(props) {
                             placeholder="* First Name"
                             defaultValue={first_name || ''}
                         />
+                        <label className="text-[#33A3DC]">* First Name</label>
                         <ErrorMessage name="first_name" />
                     </div>
 
-                    <div className="my-12">
+                    <div className="my-12 floatable-label-container">
                         <input
                             type="text"
                             {...register('last_name', { required: "Last name is required" })}
@@ -63,14 +64,15 @@ function UserForm(props) {
                             placeholder="* Last Name"
                             defaultValue={last_name || ''}
                         />
+                        <label className="text-[#33A3DC]">* Last Name</label>
                         <ErrorMessage name="last_name" />
                     </div>
 
                     <div className="flex items-center relative">
-                        <div className="flex justify-between gap-1 flex-grow-[1]">
+                        <div className="flex justify-between gap-1 flex-grow-[1] floatable-label-container">
                             <select
                                 {...register('role', { required: "Role is required" })}
-                                className="bordered-input bg-transparent text-[#C6C6C6] flex-grow-[1] w-full"
+                                className="bordered-input bg-transparent flex-grow-[1] w-full"
                                 defaultValue={role || ''}
                             >
                                 <option value="" disabled>* Role</option>
@@ -78,6 +80,7 @@ function UserForm(props) {
                                 <option value="user">User</option>
                             </select>
                             <div className="flex-grow-[1]"></div>
+                            <label className="text-[#33A3DC]">* Role</label>
                         </div>
                         <ErrorMessage name="role" />
                     </div>

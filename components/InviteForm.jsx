@@ -10,7 +10,7 @@ import { dataLength } from "./redux/reducers/paginationSlice";
 function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
     const [isSending, setIsSending] = useState(false)
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
-    
+
     const dispatch = useDispatch()
     const { users } = useSelector(state => state.users)
 
@@ -66,23 +66,25 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                         className="absolute top-1/2 -translate-y-1/2 -left-4"
                     />
 
-                    <div className="flex-grow-[1]">
+                    <div className="flex-grow-[1] floatable-label-container">
                         <input
                             type="text"
                             {...register('first_name', { required: "First name is required" })}
                             className="bordered-input w-full"
                             placeholder="* First Name"
                         />
+                        <label className="text-[#33A3DC]">* First Name</label>
                         <ErrorMessage name="first_name" />
                     </div>
 
-                    <div className="flex-grow-[1]">
+                    <div className="flex-grow-[1] floatable-label-container">
                         <input
                             type="text"
                             {...register('last_name', { required: "Last name is required" })}
                             className="bordered-input w-full"
                             placeholder="* Last Name"
                         />
+                        <label className="text-[#33A3DC]">* Last Name</label>
                         <ErrorMessage name="last_name" />
                     </div>
                 </div>
@@ -95,13 +97,18 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                             className="absolute top-1/2 -translate-y-1/2 -left-4"
                         />
 
-                        <input
-                            type="email"
-                            {...register('email', { pattern: { value: /\S+@\S+\.\S+/, message: 'Email is required' } })}
-                            className="bordered-input w-full"
-                            placeholder="* Email"
-                        />
-                        <ErrorMessage name="email" />
+                        <div className="w-full floatable-label-container">
+                            <input
+                                type="email"
+                                {...register('email', { required: "required", pattern: { value: /\S+@\S+\.\S+/, message: 'Email is required' } })}
+                                className="bordered-input w-full"
+                                placeholder="* Email"
+                            />
+                            <label className="text-[#33A3DC]">* Email</label>
+                            <div className="absolute -bottom-[24px]">
+                                <ErrorMessage name="email" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -112,17 +119,18 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                         className="absolute top-1/2 -translate-y-1/2 -left-4"
                     />
 
-                    <div className="flex justify-between gap-1 flex-grow-[1]">
+                    <div className="flex justify-between gap-1 flex-grow-[1] floatable-label-container">
                         <select
                             {...register('role', { required: "Role is required" })}
-                            className="bordered-input text-[#C6C6C6] flex-grow-[1] max-w-[50%]"
-                        // defaultValue=""
+                            className="bordered-input flex-grow-[1] max-w-[50%]"
+                            defaultValue="user"
                         >
-                            <option value="" disabled>* Role</option>
+                            <option value="role" disabled>* Role</option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
                         <div className="flex-grow-[1]"></div>
+                        <label className="text-[#33A3DC]">* Role</label>
                     </div>
                     <ErrorMessage name="role" />
                 </div>

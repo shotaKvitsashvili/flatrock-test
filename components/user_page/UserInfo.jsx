@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FileBase64 from 'react-file-base64';
 
 function UserInfo({ data, user, setValue, setLargeFileWarning, maxSize }) {
     const { first_name, last_name, email, role, img } = data
     const [imgSrc, setImgSrc] = useState(img)
+
+    const fileUploadLabel = useRef()
+
+    useEffect(() => {
+        fileUploadLabel.current && fileUploadLabel.current.querySelector('input[type="file"]').setAttribute('accept', 'image/*')
+    }, [fileUploadLabel])
 
     const active = user.status === 'active'
 
@@ -18,13 +24,14 @@ function UserInfo({ data, user, setValue, setLargeFileWarning, maxSize }) {
             </div>
 
             {
-                <label className={`font-light cursor-pointer color-[#B0ACAC] text-sm pt-4 pb-8 ${active ? 'opacity-[.7]' : 'opacity-0'}`}>
+                <label className={`font-light cursor-pointer color-[#B0ACAC] text-sm pt-4 pb-8 ${active ? 'opacity-[.7]' : 'opacity-0'}`} ref={fileUploadLabel}>
                     UPLOAD A PHOTO
                     {/* <input type="file" className='hidden' /> */}
                     <div className="hidden">
                         <FileBase64
                             multiple={false}
-                            onDone={({ base64, size }) => {
+                            onDone={(p) => {
+                                const { base64, size } = p
                                 const imgSize = size.split(' ')[0]
 
                                 imgSize < maxSize && setImgSrc(base64)

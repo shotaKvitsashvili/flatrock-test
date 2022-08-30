@@ -27,7 +27,7 @@ function UserTable() {
                 (dataLength > 0 && !isPending)
                     ?
                     <>
-                        <table className="w-full">
+                        <table className="w-full text-[12px] lg:text-base">
                             <thead className="border-b-[#D8D8D8] border-b-2 uppercase">
                                 <tr>
                                     {

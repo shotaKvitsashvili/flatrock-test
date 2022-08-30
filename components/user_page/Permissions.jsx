@@ -87,7 +87,7 @@ function Permissions({ permissions: userPermissions, role, user, id }) {
                 </div>
             </div>
             :
-            <div className='text-xl font-bold'>
+            <div className='text-xl font-bold text-center lg:text-left mt-4 lg:mt-0'>
                 Only admin can change permisssions
             </div>
     )

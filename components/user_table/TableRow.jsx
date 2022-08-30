@@ -36,12 +36,12 @@ function TableRow({ user }) {
                 >
                     <div className='flex flex-col'>
                         {user.first_name + ' ' + user.last_name}
-                        <span className='font-light'>{user.email}</span>
+                        <span className='font-light lowercase'>{user.email}</span>
                     </div>
                 </td>
 
                 <td>
-                    <div className={`flex items-center w-full justify-center ${user.status === 'active' ? '' : 'opacity-[.35]'}`}>
+                    <div className={`flex items-center w-full justify-center flex-col-reverse lg:flex-row ${user.status === 'active' ? '' : 'opacity-[.35]'}`}>
                         {
                             user.role === 'admin' && (
                                 <div className={`rounded-[30px] mr-2 py-1 px-2 ${user.status === 'active' ? 'bg-[#7E7EF1]' : 'bg-transparent'}`}>

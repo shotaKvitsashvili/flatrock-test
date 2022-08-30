@@ -19,3 +19,34 @@
 .table-footer-pagination-btn:hover {
     @apply shadow-[0px_3px_6px_#00000029] bg-[#C6C6C6];
 }
+
+.floatable-label-container {
+    position: relative;
+}
+
+.floatable-label-container label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.floatable-label-container input::placeholder {
+    color: transparent;
+}
+
+.floatable-label-container input:focus ~ label,
+.floatable-label-container input:not(:placeholder-shown) ~ label,
+.floatable-label-container select ~ label {
+    font-size: 12px;
+    transform: translateY(-30px);
+}
+
+.floatable-label-container input:focus ~ label {
+    color: #F89797;
+}
+
+.floatable-label-container input:not(:placeholder-shown) ~ label {
+    color: #33A3DC;
+}
