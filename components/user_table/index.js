@@ -20,7 +20,7 @@ function UserTable() {
     } = useTableData()
     
     return (
-        <div className="w-full pl-0 lg:[calc(theme(side-gap)+20px)]">
+        <div className="w-full pl-0 lg:pl-[calc(theme(side-gap)+20px)]">
             {isPending && <LoaderDots />}
 
             {
