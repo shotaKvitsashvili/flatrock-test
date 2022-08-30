@@ -114,7 +114,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
 
                 <div className="flex items-center relative pl-7">
                     <img
-                        src="/icons/key.svg"
+                        src="/icons/key_black.svg"
                         alt="key"
                         className="absolute top-1/2 -translate-y-1/2 -left-4"
                     />
@@ -122,7 +122,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                     <div className="flex justify-between gap-1 flex-grow-[1] floatable-label-container">
                         <select
                             {...register('role', { required: "Role is required" })}
-                            className="bordered-input flex-grow-[1] max-w-[50%]"
+                            className="bordered-input flex-grow-[1] w-full max-w-[unset] lg:max-w-[50%]"
                             defaultValue="user"
                         >
                             <option value="role" disabled>* Role</option>
@@ -135,7 +135,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                     <ErrorMessage name="role" />
                 </div>
 
-                <div className="flex justify-between mt-9 items-center pl-7">
+                <div className="flex justify-between mt-9 items-center pl-0 lg:pl-7 flex-col-reverse lg:flex-row">
                     <button
                         className="rounded-[24px] px-4 py-3"
                         disabled={!isValid || isSending}
@@ -145,7 +145,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                         }}
                     >Send Invitation</button>
 
-                    <div className="font-italic">
+                    <div className="font-italic mb-4 lg:mb-0">
                         {!isValid ? <span className="text-[#F89797]">Fill in all the fields</span> : <span className="text-[#44D36A]">Good to go</span>}
                     </div>
 
