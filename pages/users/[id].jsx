@@ -27,7 +27,7 @@ function User({ data }) {
 export async function getServerSideProps(context) {
     const { id } = context.query
 
-    const res = await fetch('http://localhost:3002/api/users/' + id)
+    const res = await fetch('https://flatrock-api.herokuapp.com/api/users/' + id)
     const data = await res.json()
 
     if (!data) {

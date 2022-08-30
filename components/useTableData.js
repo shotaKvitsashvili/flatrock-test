@@ -26,7 +26,7 @@ function useTableData() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3002/api/users')
+        axios.get('https://flatrock-api.herokuapp.com/api/users')
             .then(res => {
                 dispatch(getUsers(res.data))
                 dataLengthDispatcher(res.data)

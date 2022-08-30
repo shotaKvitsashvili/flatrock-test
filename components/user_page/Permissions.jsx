@@ -26,7 +26,7 @@ function Permissions({ permissions: userPermissions, role, user, id }) {
         u.superAdmin = checked
         dispatch(editUser(u))
 
-        axios.put(`http://localhost:3002/api/users/${id}`, u)
+        axios.put(`https://flatrock-api.herokuapp.com/api/users/${id}`, u)
     }
 
     return (

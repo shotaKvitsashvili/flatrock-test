@@ -24,7 +24,7 @@ function TableRow({ user }) {
         u.status = checked ? 'active' : 'inactive'
         dispatch(editUser(u))
 
-        axios.put(`http://localhost:3002/api/users/status/${user._id}`, { checked })
+        axios.put(`https://flatrock-api.herokuapp.com/api/users/status/${user._id}`, { checked })
     }
 
     return (

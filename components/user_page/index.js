@@ -47,7 +47,7 @@ function UserPage({ data }) {
         u.img = form_data.img ? form_data.img : u.img
 
         dispatch(editUser(u))
-        axios.put(`http://localhost:3002/api/users/${_id}`, u)
+        axios.put(`https://flatrock-api.herokuapp.com/api/users/${_id}`, u)
             .then(res => res.status === 200 && router.push('/'))
     }
 

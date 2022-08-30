@@ -11,7 +11,7 @@ function DeleteUser({ firstName, lastName, id, setOpenModal, userDeleted, setUse
     const { users } = useSelector(state => state.users)
 
     const handleDeleteUser = () => {
-        axios.delete('http://localhost:3002/api/users/' + id)
+        axios.delete('https://flatrock-api.herokuapp.com/api/users/' + id)
             .then(() => {
                 const userLength = users.length - 1;
 

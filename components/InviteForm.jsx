@@ -21,7 +21,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
             status: 'active',
             img: '/icons/user.svg'
         }
-        axios.post('http://localhost:3002/api/users', body)
+        axios.post('https://flatrock-api.herokuapp.com/api/users', body)
             .then(res => {
                 const userLength = users.length + 1;
 
