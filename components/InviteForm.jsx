@@ -130,7 +130,7 @@ function InviteForm({ setOpenModal, setUserAdded, userAdded }) {
                             <option value="user">User</option>
                         </select>
                         <div className="flex-grow-[1]"></div>
-                        <label className="text-[#33A3DC]">* Role</label>
+                        <label className="text-[#33A3DC] role-select-label">* Role</label>
                     </div>
                     <ErrorMessage name="role" />
                 </div>

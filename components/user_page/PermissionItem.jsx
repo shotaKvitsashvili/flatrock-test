@@ -1,36 +1,11 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { editUser } from '../redux/reducers/userSlice'
-
-function PermissionItem({ permissionItemKey, user, permission }) {
+function PermissionItem({ permissionItemKey }) {
     const [checked, setChecked] = useState(false)
-
-    const dispatch = useDispatch()
 
     const handleUserPermissionChange = e => {
         const { checked } = e.target;
         setChecked(checked)
-
-        const u = { ...user }
-
-            ;
-        // u.permissions[permission][permissionItemKey] = { ...u.permissions[permission][permissionItemKey], [permissionItemKey]: u['permissions'][permission][permissionItemKey] }
-        // u.permissions = { ...u.permissions, : u['permissions'][permission][permissionItemKey] }
-        u.permissions = { ...u.permissions, [permissionItemKey]: checked }
-
-        console.log(u['permissions'][permission]);
-
-        // const subPermissions = { ...u.permissions[permission] };
-
-        // for (const key in subPermissions) {
-        //     checked ? (subPermissions[key] = true) : (subPermissions[key] = false)
-        // }
-
-        // u.permissions = { ...u.permissions, [permission][permissionItemKey]: }
-        // dispatch(editUser(u))
-
-        // axios.put(`https://flatrock-api.herokuapp.com/api/users/${id}`, u)
     }
 
     return (

@@ -30,6 +30,11 @@
     left: 0;
     transition: all 0.3s ease;
     pointer-events: none;
+    color: #C6C6C6;
+}
+
+.floatable-label-container label.role-select-label {
+    color: #33A3DC;
 }
 
 .floatable-label-container input::placeholder {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
     Accordion,
@@ -72,10 +72,7 @@ function Permissions({ permissions: userPermissions, role, user, id }) {
                                             permissionItem.map(p => (
                                                 <PermissionItem
                                                     key={p}
-                                                    permissionItem={permissionItem}
                                                     permissionItemKey={p}
-                                                    user={user}
-                                                    permission={permission}
                                                 />
                                             ))
                                         }
